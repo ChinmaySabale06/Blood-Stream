@@ -1,58 +1,133 @@
-import React from 'react'
-import Navbar from '../components/Navbar';
-import home from '../assets/home.jpg';
-import { Link } from 'react-router-dom';
-import { useUser } from '@clerk/clerk-react'
+"use client"
+
+import React from "react"
+import Navbar from "../components/Navbar"
+import { Link } from "react-router-dom"
+import { useUser } from "@clerk/clerk-react"
 import { useGSAP } from "@gsap/react"
-import gsap from 'gsap';
+import gsap from "gsap"
 
 const Home = () => {
-  const {isSignedIn} = useUser();
+  const { isSignedIn } = useUser()
 
   useGSAP(() => {
-    gsap.fromTo('.t1', {
-      opacity: 0,
-      y: 20,
-    }, {
-      opacity: 1,
-      y:0,
-      delay: 1,
-      stagger: 0.1
-    })
+    gsap.fromTo(
+      ".t1",
+      {
+        opacity: 0,
+        y: 20,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        delay: 1,
+        stagger: 0.1,
+      },
+    )
 
-    gsap.fromTo('#p1', {
-      opacity: 0,
-      y: 20
-    }, {
-      opacity: 1,
-      y: 0,
-      delay: 1,
-    })
+    gsap.fromTo(
+      "#p1",
+      {
+        opacity: 0,
+        y: 20,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        delay: 1,
+      },
+    )
   }, [])
 
   return (
     <>
       <Navbar />
-      <div className=' w-full h-screen flex items-center justify-center bg-cover bg-center text-white font-serif bg-black'>
-        <div className='w-1/2 h-screen py-8 flex items-center justify-center flex-col'>
-          <h1 className='t1 text-5xl font-bold'>Welcome to Blood<span className='text-red-600'>Stream</span></h1>
-          <h2 className='t1 mt-2 text-4xl font-bold'>Your Lifeline Network</h2>
-          <p id='p1' className='text-xl mt-2 font-semibold'>Donate Blood. Save Lives. Make a Difference.</p>
+      <div className="relative w-full h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white font-serif overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full animate-pulse"></div>
+          <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-red-500/10 rounded-full animate-bounce"></div>
+          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-indigo-500/5 rounded-full animate-ping"></div>
 
-          <div className='mt-6 flex items-center gap-6'>
-            {isSignedIn ? (
-              <>
-                <Link to="/verifyorganization" className='px-4 py-2 text-lg bg-red-600 text-white rounded-full hover:bg-red-700 transition'> Verify as an Organization</Link>
-                <Link to="/bloodcamp" className='px-4 py-2 text-lg bg-red-600 text-white rounded-full hover:bg-red-700 transition'> Blood Camps</Link>
-              </>
-            ) : (
-              <>
-                <Link to="/register" className='px-4 py-2 text-lg bg-red-600 text-white rounded-full hover:bg-red-700 transition'> Get Started</Link>
-                <a href="#" className='px-4 py-2 text-lg border border-red-600 rounded-full bg-gray-900/60 hover:bg-red-600 hover:text-white transition'> Join Now</a>
-              </>
-            )}
+          {/* Floating particles */}
+          <div className="absolute top-1/4 left-1/4 w-4 h-4 bg-blue-400/60 rounded-full animate-float"></div>
+          <div className="absolute top-3/4 right-1/3 w-6 h-6 bg-red-400/60 rounded-full animate-float-delayed"></div>
+          <div className="absolute bottom-1/3 left-1/2 w-2 h-2 bg-indigo-400/60 rounded-full animate-float"></div>
+          <div className="absolute top-1/6 right-1/6 w-3 h-3 bg-pink-400/60 rounded-full animate-float-delayed"></div>
+        </div>
+
+        {/* Main Content */}
+        <div className="relative z-10 w-full max-w-4xl mx-auto px-8 text-center">
+          <div className="backdrop-blur-xl bg-white/5 border border-white/20 rounded-3xl p-12 shadow-2xl">
+            <h1 className="t1 text-7xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-red-400 to-indigo-400 bg-clip-text text-transparent">
+              Welcome to Blood<span className="text-red-400">Stream</span>
+            </h1>
+            <h2 className="t1 text-4xl font-bold mb-6 text-blue-300">Your Lifeline Network</h2>
+            <p id="p1" className="text-2xl font-semibold text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+              Donate Blood. Save Lives. Make a Difference.
+            </p>
+
+            <div className="flex items-center justify-center gap-8 flex-wrap">
+              {isSignedIn ? (
+                <>
+                  <Link
+                    to="/verifyorganization"
+                    className="group relative px-8 py-4 text-lg font-semibold rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="relative z-10 px-8 py-4 bg-red-600 rounded-2xl border border-red-500/50 group-hover:bg-transparent transition-all duration-300">
+                      Verify as an Organization
+                    </div>
+                  </Link>
+                  <Link
+                    to="/bloodcamp"
+                    className="group relative px-8 py-4 text-lg font-semibold rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="relative z-10 px-8 py-4 border border-blue-500/50 rounded-2xl bg-blue-900/30 group-hover:bg-transparent transition-all duration-300">
+                      Blood Camps
+                    </div>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/register"
+                    className="group relative px-8 py-4 text-lg font-semibold rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="relative z-10 px-8 py-4 bg-red-600 rounded-2xl border border-red-500/50 group-hover:bg-transparent transition-all duration-300">
+                      Get Started
+                    </div>
+                  </Link>
+                  <button className="group relative px-8 py-4 text-lg font-semibold rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="relative z-10 px-8 py-4 border border-blue-500/50 rounded-2xl bg-blue-900/30 group-hover:bg-transparent transition-all duration-300">
+                      Join Now
+                    </div>
+                  </button>
+                </>
+              )}
+            </div>
           </div>
         </div>
+
+        <style jsx>{`
+          @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+          }
+          @keyframes float-delayed {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(-180deg); }
+          }
+          .animate-float {
+            animation: float 6s ease-in-out infinite;
+          }
+          .animate-float-delayed {
+            animation: float-delayed 8s ease-in-out infinite;
+          }
+        `}</style>
       </div>
     </>
   )
