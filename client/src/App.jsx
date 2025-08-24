@@ -13,7 +13,6 @@ import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react';
 import UserHandler from './UserHandler'; // <-- Import the UserHandler component
 import BloodStockDashboard from './components/BloodStockDashboard';
 
-
 const App = () => {
 
   return (

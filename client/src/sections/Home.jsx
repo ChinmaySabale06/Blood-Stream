@@ -1,4 +1,4 @@
-"use client"
+// "use client"
 
 import React from "react"
 import Navbar from "../components/Navbar"
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 import { useUser } from "@clerk/clerk-react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
+import Aurora from "../blocks/Backgrounds/Aurora/Aurora"
 
 const Home = () => {
   const { isSignedIn } = useUser()
