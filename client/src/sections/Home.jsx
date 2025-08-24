@@ -59,11 +59,11 @@ const Home = () => {
         {/* Main Content */}
         <div className="relative z-10 w-full max-w-4xl mx-auto px-8 text-center">
           <div className="backdrop-blur-xl bg-white/5 border border-white/20 rounded-3xl p-12 shadow-2xl">
-            <h1 className="t1 text-7xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-red-400 to-indigo-400 bg-clip-text text-transparent">
-              Welcome to Blood<span className="text-red-400">Stream</span>
+            <h1 className="t1 text-7xl font-bold mb-4 bg-gray-200 bg-clip-text text-transparent">
+              Welcome to Blood<span className="text-red-600">Stream</span>
             </h1>
-            <h2 className="t1 text-4xl font-bold mb-6 text-blue-300">Your Lifeline Network</h2>
-            <p id="p1" className="text-2xl font-semibold text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+            <h2 className="t1 text-4xl font-bold mb-6 text-red-600">Your Lifeline Network</h2>
+            <p id="p1" className="text-2xl font-semibold text-gray-200 mb-12 max-w-2xl mx-auto leading-relaxed">
               Donate Blood. Save Lives. Make a Difference.
             </p>
 
@@ -72,9 +72,9 @@ const Home = () => {
                 <>
                   <Link
                     to="/verifyorganization"
-                    className="group relative px-8 py-4 text-lg font-semibold rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105"
+                    className="group relative px-8 py-4 text-lg font-semibold rounded-2xl overflow-hidden transition-all duration-300"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 w- bg-gradient-to-r from-red-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="relative z-10 px-8 py-4 bg-red-600 rounded-2xl border border-red-500/50 group-hover:bg-transparent transition-all duration-300">
                       Verify as an Organization
                     </div>

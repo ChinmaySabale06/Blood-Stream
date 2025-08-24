@@ -2,7 +2,7 @@ import React from 'react'
 
 const Contact = () => {
   return (
-    <div id='contact' className='bg-black'>
+    <div id='contact' className='min-h-screen bg-gradient-to-br from-cyan-900 via-blue-900 to-indigo-900'>
       <section className='min-h-screen flex items-center justify-center py-20'>
         <div className='mt-10 px-4 w-150 bg-cyan-950/30 py-8 rounded-xl shadow-md hover:shadow-lg shadow-cyan-600 transition duration-300'>  
           <h2 className='text-3xl font-bold mb-8 bg-cyan-400 bg-clip-text text-transparent text-center'> Get in Touch</h2>
