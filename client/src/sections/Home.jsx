@@ -6,7 +6,6 @@ import { Link } from "react-router-dom"
 import { useUser } from "@clerk/clerk-react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
-import Aurora from "../blocks/Backgrounds/Aurora/Aurora"
 
 const Home = () => {
   const { isSignedIn } = useUser()
@@ -112,23 +111,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-
-        <style jsx>{`
-          @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-          }
-          @keyframes float-delayed {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(-180deg); }
-          }
-          .animate-float {
-            animation: float 6s ease-in-out infinite;
-          }
-          .animate-float-delayed {
-            animation: float-delayed 8s ease-in-out infinite;
-          }
-        `}</style>
       </div>
     </>
   )
