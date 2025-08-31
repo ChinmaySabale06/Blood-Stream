@@ -79,7 +79,7 @@ export default function BloodDonationBenefits() {
           <div className="text-center">
             <div className="inline-block p-1 bg-gradient-to-r from-red-500 to-pink-500 rounded-2xl">
               <Link
-                to="/nearbybloodbanks"
+                to="/appointments"
                 className="block px-8 py-4 bg-slate-900 text-white rounded-xl font-bold text-lg hover:bg-transparent transition-all duration-300 group"
               >
                 <span className="flex items-center justify-center space-x-2">

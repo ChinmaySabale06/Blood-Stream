@@ -12,6 +12,10 @@ import BloodDonationList from './components/BloodDonationList';
 import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react';
 import UserHandler from './UserHandler'; // <-- Import the UserHandler component
 import BloodStockDashboard from './components/BloodStockDashboard';
+import Appointments from './components/Appointments';
+import DonorRecord from './components/DonorRecords';
+import Reports from './components/Reports';
+import RequestBlood from './components/RequestBlood';
 
 const App = () => {
 
@@ -33,6 +37,10 @@ const App = () => {
         <Route path='/blooddonationform' element={<SignedIn> <BloodDonationForm /> </SignedIn>} />
         <Route path='/blooddonationlist' element={<SignedIn> <BloodDonationList /> </SignedIn>} />
         <Route path='/bloodstock' element={<SignedIn> <BloodStockDashboard /> </SignedIn>} />
+        <Route path='/appointments' element={<SignedIn> <Appointments /> </SignedIn>} />
+        <Route path='/donorrecords' element={<SignedIn> <DonorRecord /> </SignedIn>} />
+        <Route path='/reports' element={<SignedIn> <Reports /> </SignedIn>} />
+        <Route path='/requestblood' element={<SignedIn> <RequestBlood /> </SignedIn>} />
       </Routes>
 
       {/* <SignedOut>

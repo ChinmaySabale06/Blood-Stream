@@ -35,10 +35,10 @@ const UserDashboard = () => {
   const navItems = [
     { name: "Dashboard", href: "#", active: true, icon: "📊" },
     { name: "Blood Stocks", href: "/bloodstock", active: false, icon: "🩸" },
-    { name: "Donor Records", href: "#", active: false, icon: "📋" },
-    { name: "Request Blood", href: "#", active: false, icon: "🆘" },
-    { name: "Appointments", href: "#", active: false, icon: "📅" },
-    { name: "Reports", href: "#", active: false, icon: "📈" },
+    { name: "Donor Records", href: "/donorrecords", active: false, icon: "📋" },
+    { name: "Request Blood", href: "/requestblood", active: false, icon: "🆘" },
+    { name: "Appointments", href: "/appointments", active: false, icon: "📅" },
+    { name: "Reports", href: "/reports", active: false, icon: "📈" },
   ]
 
   return (
@@ -52,8 +52,8 @@ const UserDashboard = () => {
 
       {/* Sidebar */}
       <aside className="relative z-10 w-80 backdrop-blur-xl bg-white/10 border-r border-white/20 text-white flex flex-col p-6">
-        <Link to="/" className="text-4xl font-mono font-bold mb-8 hover:scale-105 transition-transform duration-300">
-          Blood<span className="text-red-400">.Stream</span>
+        <Link to="/" className="text-4xl font-mono font-bold mb-8 transition-transform duration-300">
+          Blood<span className="text-red-500">.Stream</span>
         </Link>
 
         <nav className="flex flex-col gap-2 text-sm flex-1">

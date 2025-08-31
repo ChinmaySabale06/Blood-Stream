@@ -1,12 +1,11 @@
 import React from 'react'
-import { ElectricBorder } from 'react-bits'
 
 const Contact = () => {
   return (
     <div id='contact' className='min-h-screen bg-gradient-to-br from-cyan-900 via-blue-900 to-indigo-900'>
       <section className="min-h-screen flex items-center justify-center py-20">
-        <div className="relative p-[2px] rounded-xl bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 animate-border">
-          <div className="mt-10 px-6 w-150 bg-cyan-950/30 py-8 rounded-xl shadow-md hover:shadow-lg shadow-cyan-600 transition duration-300">
+        <div className="relative p-[2px] rounded-xl">
+          <div className="mt-10 px-6 w-150 bg-cyan-950/50 py-8 rounded-xl shadow-md hover:shadow-lg shadow-cyan-600 transition duration-300">
             <h2 className="text-3xl font-bold mb-8 bg-cyan-400 bg-clip-text text-transparent text-center">
               Get in Touch
             </h2>

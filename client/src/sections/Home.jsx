@@ -4,40 +4,9 @@ import React from "react"
 import Navbar from "../components/Navbar"
 import { Link } from "react-router-dom"
 import { useUser } from "@clerk/clerk-react"
-import { useGSAP } from "@gsap/react"
-import gsap from "gsap"
 
 const Home = () => {
   const { isSignedIn } = useUser()
-
-  useGSAP(() => {
-    gsap.fromTo(
-      ".t1",
-      {
-        opacity: 0,
-        y: 20,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        delay: 1,
-        stagger: 0.1,
-      },
-    )
-
-    gsap.fromTo(
-      "#p1",
-      {
-        opacity: 0,
-        y: 20,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        delay: 1,
-      },
-    )
-  }, [])
 
   return (
     <>
