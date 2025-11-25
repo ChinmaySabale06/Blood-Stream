@@ -2,9 +2,12 @@
 
 import React from "react"
 import { useState } from "react"
-import DashboardLayout from "./Dashboardcomponents/dashboard-layout"
+import { useUser } from "@clerk/clerk-react"
+import axios from "axios"
+import DashboardLayout from "./DashboardComponents/dashboard-layout"
 
 export default function RequestBlood() {
+  const { user } = useUser()
   const [form, setForm] = useState({
     patientName: "",
     bloodType: "",
@@ -18,9 +21,30 @@ export default function RequestBlood() {
   })
 
   const onChange = (e) => setForm((p) => ({ ...p, [e.target.name]: e.target.value }))
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
-    alert("Blood request submitted. Our team will reach out shortly.")
+    try {
+      await axios.post("/api/bloodrequests", {
+        ...form,
+        units: parseInt(form.units),
+        requestedBy: user?.id,
+      })
+      alert("Blood request submitted successfully! Our team will reach out shortly.")
+      setForm({
+        patientName: "",
+        bloodType: "",
+        units: "",
+        urgency: "Normal",
+        hospitalName: "",
+        city: "",
+        contactNumber: "",
+        neededBy: "",
+        reason: "",
+      })
+    } catch (err) {
+      console.error(err)
+      alert("Failed to submit blood request. Please try again.")
+    }
   }
 
   return (

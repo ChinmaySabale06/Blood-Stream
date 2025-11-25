@@ -3,7 +3,7 @@
 import React from "react"
 import { useEffect, useState } from "react"
 import axios from "axios"
-import DashboardLayout from "./Dashboardcomponents/dashboard-layout"
+import DashboardLayout from "./DashboardComponents/dashboard-layout"
 
 export default function BloodStockDashboard() {
   const [stockData, setStockData] = useState([])

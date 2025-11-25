@@ -2,7 +2,7 @@
 
 import React from "react"
 import { useMemo, useState } from "react"
-import DashboardLayout from "./Dashboardcomponents/dashboard-layout"
+import DashboardLayout from "./DashboardComponents/dashboard-layout"
 
 const sampleDonors = [
   {
