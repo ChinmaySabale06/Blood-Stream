@@ -2,6 +2,7 @@
 import express from 'express';
 import { body, validationResult } from 'express-validator';
 import Appointment from '../models/Appointment.js';
+import { requireAuth } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -22,7 +23,7 @@ router.get('/', async (req, res) => {
 });
 
 // POST /api/appointments - create a new appointment
-router.post('/', [
+router.post('/', requireAuth, [
   body('donor').notEmpty().withMessage('Donor name is required'),
   body('date').isISO8601().toDate().withMessage('Valid date is required'),
   body('location').notEmpty().withMessage('Location is required'),
@@ -41,7 +42,7 @@ router.post('/', [
 });
 
 // PATCH /api/appointments/:id/status - update appointment status
-router.patch('/:id/status', [
+router.patch('/:id/status', requireAuth, [
   body('status').isIn(['Pending', 'Confirmed', 'Cancelled', 'Completed']).withMessage('Valid status required'),
 ], async (req, res) => {
   const errors = validationResult(req);
@@ -60,7 +61,7 @@ router.patch('/:id/status', [
 });
 
 // DELETE /api/appointments/:id - delete an appointment
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', requireAuth, async (req, res) => {
   try {
     const { id } = req.params;
     const deleted = await Appointment.findByIdAndDelete(id);

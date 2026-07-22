@@ -2,11 +2,12 @@
 import express from 'express';
 import { body, validationResult } from 'express-validator';
 import BloodRequest from '../models/BloodRequest.js';
+import { requireAuth } from '../middleware/auth.js';
 
 const router = express.Router();
 
 // POST /api/bloodrequests - create a new blood request
-router.post('/', [
+router.post('/', requireAuth, [
   body('patientName').notEmpty().withMessage('Patient name is required'),
   body('bloodType').isIn(["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]).withMessage('Valid blood type required'),
   body('units').isInt({ min: 1 }).withMessage('Units must be >= 1'),
@@ -48,7 +49,7 @@ router.get('/', async (req, res) => {
 });
 
 // PATCH /api/bloodrequests/:id/status - update request status
-router.patch('/:id/status', [
+router.patch('/:id/status', requireAuth, [
   body('status').isIn(['Pending', 'Fulfilled', 'Cancelled']).withMessage('Valid status required'),
 ], async (req, res) => {
   const errors = validationResult(req);

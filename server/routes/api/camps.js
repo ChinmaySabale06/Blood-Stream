@@ -2,6 +2,7 @@
 import express from 'express';
 const router = express.Router();
 import BloodCamp from '../../models/BloodCamp.js';
+import { requireAuth } from '../../middleware/auth.js';
 
 // @route   GET api/camps
 // @desc    Get all blood camps
@@ -18,8 +19,8 @@ router.get('/', async (req, res) => {
 
 // @route   POST api/camps
 // @desc    Create a new blood camp
-// @access  Public
-router.post('/', async (req, res) => {
+// @access  Private
+router.post('/', requireAuth, async (req, res) => {
   const { campName, organizerName, contactNumber, date, location, description } = req.body;
   try {
     const newCamp = new BloodCamp({

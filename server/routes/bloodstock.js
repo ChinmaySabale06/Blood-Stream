@@ -2,6 +2,7 @@
 import express from 'express';
 import BloodStock from '../models/BloodStock.js';
 import { body, validationResult } from 'express-validator';
+import { requireAuth } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -17,7 +18,7 @@ const updateExpiredStatus = async () => {
 // @route   POST /api/bloodstock/add
 // @desc    Add a new blood unit to the stock
 // @access  Private (e.g., restricted to hospital/organization role)
-router.post('/add', [
+router.post('/add', requireAuth, [
   body('bloodType').notEmpty().withMessage('Blood type is required.'),
   body('expiryDate').isISO8601().toDate().withMessage('Valid expiry date is required.')
 ], async (req, res) => {
@@ -63,7 +64,7 @@ router.get('/', async (req, res) => {
 // @route   DELETE /api/bloodstock/:unitId
 // @desc    "Remove" a blood unit by marking it as used
 // @access  Private
-router.delete('/:unitId', async (req, res) => {
+router.delete('/:unitId', requireAuth, async (req, res) => {
   try {
     const unit = await BloodStock.findById(req.params.unitId);
 

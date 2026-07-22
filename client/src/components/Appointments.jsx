@@ -3,7 +3,7 @@
 import React from "react"
 import { useEffect, useState } from "react"
 import { useUser } from "@clerk/clerk-react"
-import axios from "axios"
+import api from "../lib/api"
 import DashboardLayout from "./DashboardComponents/dashboard-layout"
 
 export default function Appointments() {
@@ -15,7 +15,7 @@ export default function Appointments() {
   const fetchAppointments = async () => {
     try {
       setLoading(true)
-      const res = await axios.get("/api/appointments")
+      const res = await api.get("/api/appointments")
       if (Array.isArray(res.data)) {
         setAppointments(res.data)
       } else {
@@ -40,7 +40,7 @@ export default function Appointments() {
     e.preventDefault()
     try {
       const dateTime = new Date(`${form.date}T${form.time}`)
-      await axios.post("/api/appointments", {
+      await api.post("/api/appointments", {
         donor: form.donor,
         date: dateTime.toISOString(),
         location: form.location,
@@ -57,7 +57,7 @@ export default function Appointments() {
 
   const updateStatus = async (id, status) => {
     try {
-      await axios.patch(`/api/appointments/${id}/status`, { status })
+      await api.patch(`/api/appointments/${id}/status`, { status })
       fetchAppointments()
     } catch (err) {
       console.error("Failed to update status:", err)
@@ -68,7 +68,7 @@ export default function Appointments() {
   const deleteAppointment = async (id) => {
     if (!confirm("Are you sure you want to delete this appointment?")) return
     try {
-      await axios.delete(`/api/appointments/${id}`)
+      await api.delete(`/api/appointments/${id}`)
       fetchAppointments()
     } catch (err) {
       console.error("Failed to delete appointment:", err)
@@ -79,15 +79,15 @@ export default function Appointments() {
   return (
     <DashboardLayout title="Appointments" active="appointments">
       {/* Upcoming Appointments */}
-      <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl shadow-2xl overflow-hidden mb-8">
+      <div className="health-card mb-8 overflow-hidden">
         <div className="p-6 border-b border-white/10">
-          <h2 className="text-2xl font-bold text-blue-300">Upcoming Appointments</h2>
+          <h2 className="text-2xl font-bold text-cyan-200">Upcoming Appointments</h2>
         </div>
         <div className="divide-y divide-white/10">
           {loading ? (
-            <div className="p-6 text-center text-gray-300">Loading appointments...</div>
+            <div className="p-6 text-center text-slate-300">Loading appointments...</div>
           ) : appointments.length === 0 ? (
-            <div className="p-6 text-center text-gray-300">No appointments scheduled yet.</div>
+            <div className="p-6 text-center text-slate-300">No appointments scheduled yet.</div>
           ) : (
             appointments.map((a) => (
               <div
@@ -96,9 +96,9 @@ export default function Appointments() {
               >
                 <div>
                   <div className="text-lg font-semibold">{a.donor}</div>
-                  <div className="text-gray-300 text-sm">{a.location}</div>
+                  <div className="text-slate-300 text-sm">{a.location}</div>
                 </div>
-                <div className="text-gray-200">
+                <div className="text-slate-200">
                   {new Date(a.date).toLocaleDateString()} • {new Date(a.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </div>
                 <div className="flex items-center gap-2">
@@ -118,7 +118,7 @@ export default function Appointments() {
                     {a.status === "Pending" && (
                       <button
                         onClick={() => updateStatus(a._id, "Confirmed")}
-                        className="px-3 py-1 text-xs rounded-lg bg-green-600/30 border border-green-500/40 hover:bg-green-600/50 transition-colors"
+                        className="rounded-lg border border-green-500/40 bg-green-600/30 px-3 py-1 text-xs hover:bg-green-600/50"
                       >
                         Confirm
                       </button>
@@ -126,7 +126,7 @@ export default function Appointments() {
                     {a.status === "Confirmed" && (
                       <button
                         onClick={() => updateStatus(a._id, "Completed")}
-                        className="px-3 py-1 text-xs rounded-lg bg-blue-600/30 border border-blue-500/40 hover:bg-blue-600/50 transition-colors"
+                        className="rounded-lg border border-blue-500/40 bg-blue-600/30 px-3 py-1 text-xs hover:bg-blue-600/50"
                       >
                         Complete
                       </button>
@@ -134,14 +134,14 @@ export default function Appointments() {
                     {a.status !== "Cancelled" && (
                       <button
                         onClick={() => updateStatus(a._id, "Cancelled")}
-                        className="px-3 py-1 text-xs rounded-lg bg-red-600/30 border border-red-500/40 hover:bg-red-600/50 transition-colors"
+                        className="rounded-lg border border-red-500/40 bg-red-600/30 px-3 py-1 text-xs hover:bg-red-600/50"
                       >
                         Cancel
                       </button>
                     )}
                     <button
                       onClick={() => deleteAppointment(a._id)}
-                      className="px-3 py-1 text-xs rounded-lg bg-gray-600/30 border border-gray-500/40 hover:bg-gray-600/50 transition-colors"
+                      className="rounded-lg border border-slate-500/50 bg-slate-600/30 px-3 py-1 text-xs hover:bg-slate-600/50"
                     >
                       Delete
                     </button>
@@ -154,8 +154,8 @@ export default function Appointments() {
       </div>
 
       {/* Schedule Form */}
-      <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-8">
-        <h2 className="text-2xl font-bold text-indigo-300 mb-6">Schedule New Appointment</h2>
+      <div className="health-card p-8">
+        <h2 className="mb-6 text-2xl font-bold text-cyan-200">Schedule New Appointment</h2>
         <form onSubmit={onSubmit} className="grid md:grid-cols-4 gap-6">
           <input
             name="donor"
@@ -163,7 +163,7 @@ export default function Appointments() {
             onChange={onChange}
             placeholder="Donor name"
             required
-            className="w-full p-4 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-400 focus:border-transparent outline-none transition-all duration-300"
+            className="health-input"
           />
           <input
             name="date"
@@ -171,7 +171,7 @@ export default function Appointments() {
             value={form.date}
             onChange={onChange}
             required
-            className="w-full p-4 rounded-2xl bg-white/10 border border-white/20 text-white focus:ring-2 focus:ring-indigo-400 focus:border-transparent outline-none transition-all duration-300"
+            className="health-input"
           />
           <input
             name="time"
@@ -179,7 +179,7 @@ export default function Appointments() {
             value={form.time}
             onChange={onChange}
             required
-            className="w-full p-4 rounded-2xl bg-white/10 border border-white/20 text-white focus:ring-2 focus:ring-indigo-400 focus:border-transparent outline-none transition-all duration-300"
+            className="health-input"
           />
           <input
             name="location"
@@ -187,12 +187,12 @@ export default function Appointments() {
             onChange={onChange}
             placeholder="Location"
             required
-            className="w-full p-4 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-400 focus:border-transparent outline-none transition-all duration-300"
+            className="health-input"
           />
           <div className="md:col-span-4">
             <button
               type="submit"
-              className="w-full py-4 bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 rounded-2xl text-white font-bold text-lg shadow-2xl transition-all duration-300 hover:scale-105"
+              className="health-btn-primary w-full py-4 text-base sm:text-lg"
             >
               Schedule Appointment
             </button>

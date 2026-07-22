@@ -2,7 +2,7 @@
 
 import React from "react"
 import { useEffect, useState } from "react"
-import axios from "axios"
+import api from "../lib/api"
 import DashboardLayout from "./DashboardComponents/dashboard-layout"
 
 export default function BloodStockDashboard() {
@@ -17,7 +17,7 @@ export default function BloodStockDashboard() {
   const fetchBloodStock = async () => {
     try {
       setLoading(true)
-      const res = await axios.get("http://localhost:5000/api/bloodstock")
+      const res = await api.get("/api/bloodstock")
       setStockData(res.data)
     } catch (err) {
       setError("Failed to fetch blood stock data.")
@@ -40,7 +40,7 @@ export default function BloodStockDashboard() {
       return
     }
     try {
-      await axios.post("http://localhost:5000/api/bloodstock/add", newUnit)
+      await api.post("/api/bloodstock/add", newUnit)
       setNewUnit({ bloodType: "", expiryDate: "" })
       fetchBloodStock()
     } catch (err) {
@@ -60,7 +60,7 @@ export default function BloodStockDashboard() {
       )}
 
       {error && (
-        <div className="backdrop-blur-xl bg-red-500/20 border border-red-500/30 rounded-2xl p-4 mb-6">
+        <div className="mb-6 rounded-2xl border border-rose-400/35 bg-rose-500/12 p-4">
           <p className="text-red-200">{error}</p>
         </div>
       )}
@@ -70,7 +70,7 @@ export default function BloodStockDashboard() {
         const stock = stockData.find((item) => item._id === type)
         return !stock || stock.count < lowStockThreshold
       }).length > 0 && (
-        <div className="mb-8 backdrop-blur-xl bg-yellow-500/20 border border-yellow-500/30 rounded-2xl p-6">
+        <div className="mb-8 rounded-2xl border border-amber-400/35 bg-amber-500/12 p-6">
           <h2 className="font-bold text-yellow-300 mb-4 text-xl flex items-center">
             <span className="text-2xl mr-2">⚠️</span>
             Low Stock Alerts!
@@ -82,7 +82,7 @@ export default function BloodStockDashboard() {
                 return !stock || stock.count < lowStockThreshold
               })
               .map((type) => (
-                <div key={type} className="flex items-center justify-between bg-yellow-500/10 rounded-xl p-3">
+                <div key={type} className="flex items-center justify-between rounded-xl bg-amber-500/10 p-3">
                   <span className="text-yellow-200">
                     The stock for <strong className="text-yellow-100">{type}</strong> is critically low.
                   </span>
@@ -96,17 +96,17 @@ export default function BloodStockDashboard() {
       )}
 
       {/* Stock Data Table */}
-      <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl overflow-hidden shadow-2xl mb-8">
+      <div className="health-card mb-8 overflow-hidden">
         <div className="p-6 border-b border-white/20">
-          <h3 className="text-2xl font-bold text-blue-300">Current Blood Stock</h3>
+          <h3 className="text-2xl font-bold text-cyan-200">Current Blood Stock</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full">
             <thead>
               <tr className="border-b border-white/20">
-                <th className="p-6 text-left text-lg font-semibold text-blue-300">Blood Type</th>
-                <th className="p-6 text-left text-lg font-semibold text-blue-300">Available Units</th>
-                <th className="p-6 text-left text-lg font-semibold text-blue-300">Status</th>
+                <th className="p-6 text-left text-lg font-semibold text-cyan-200">Blood Type</th>
+                <th className="p-6 text-left text-lg font-semibold text-cyan-200">Available Units</th>
+                <th className="p-6 text-left text-lg font-semibold text-cyan-200">Status</th>
               </tr>
             </thead>
             <tbody>
@@ -117,7 +117,7 @@ export default function BloodStockDashboard() {
                 return (
                   <tr key={type} className="border-b border-white/10 hover:bg-white/5 transition-colors duration-300">
                     <td className="p-6">
-                      <span className="inline-block px-4 py-2 bg-red-500/20 rounded-full border border-red-500/30 font-bold text-red-300">
+                      <span className="inline-block rounded-full border border-rose-400/35 bg-rose-500/15 px-4 py-2 font-bold text-rose-200">
                         {type}
                       </span>
                     </td>
@@ -143,43 +143,43 @@ export default function BloodStockDashboard() {
 
       {/* Add Blood Unit Form (Hospitals only) */}
       {hospitalUser && (
-        <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl p-8 shadow-2xl">
-          <h2 className="text-2xl font-bold mb-6 text-green-300 flex items-center">
+        <div className="health-card p-8">
+          <h2 className="mb-6 flex items-center text-2xl font-bold text-emerald-200">
             <span className="text-3xl mr-3">➕</span>
             Add New Blood Unit
           </h2>
           <form onSubmit={handleAddUnit} className="space-y-6">
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Blood Type</label>
+                <label className="mb-2 block text-sm font-medium text-slate-300">Blood Type</label>
                 <select
                   value={newUnit.bloodType}
                   onChange={(e) => setNewUnit({ ...newUnit, bloodType: e.target.value })}
-                  className="w-full p-4 bg-white/10 border border-white/20 rounded-xl text-white focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300"
+                  className="health-select"
                 >
-                  <option value="" className="bg-gray-800">
+                  <option value="" className="bg-slate-900">
                     Select Blood Type
                   </option>
                   {bloodTypes.map((type) => (
-                    <option key={type} value={type} className="bg-gray-800">
+                    <option key={type} value={type} className="bg-slate-900">
                       {type}
                     </option>
                   ))}
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Expiry Date</label>
+                <label className="mb-2 block text-sm font-medium text-slate-300">Expiry Date</label>
                 <input
                   type="date"
                   value={newUnit.expiryDate}
                   onChange={(e) => setNewUnit({ ...newUnit, expiryDate: e.target.value })}
-                  className="w-full p-4 bg-white/10 border border-white/20 rounded-xl text-white focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300"
+                  className="health-input"
                 />
               </div>
             </div>
             <button
               type="submit"
-              className="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-xl font-bold text-lg hover:from-green-600 hover:to-emerald-600 transition-all duration-300 hover:scale-105 shadow-lg"
+              className="health-btn-primary w-full py-4 text-base sm:text-lg"
             >
               Add Blood Unit
             </button>

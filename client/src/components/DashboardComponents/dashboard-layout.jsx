@@ -1,44 +1,57 @@
 "use client"
 
 import React from "react"
+import { useState } from "react"
 import { UserButton, useUser } from "@clerk/clerk-react"
 import DashboardSidebar from "./dashboard-sidebar"
 
 export default function DashboardLayout({ title, subtitle, active, children }) {
   const { user } = useUser()
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 overflow-hidden">
+    <div className="flex h-screen overflow-hidden">
       {/* Animated Background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-blue-500/10 rounded-full animate-pulse" />
-        <div className="absolute bottom-1/4 left-1/4 w-48 h-48 bg-red-500/10 rounded-full animate-bounce" />
-        <div className="absolute top-1/2 left-1/2 w-32 h-32 bg-indigo-500/10 rounded-full animate-ping" />
+        <div className="absolute top-1/4 right-1/4 h-64 w-64 rounded-full bg-cyan-500/13 blur-3xl" />
+        <div className="absolute bottom-1/4 left-1/4 h-48 w-48 rounded-full bg-rose-500/13 blur-3xl" />
       </div>
 
       {/* Sidebar */}
-      <DashboardSidebar active={active} />
+      <DashboardSidebar active={active} mobileOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       {/* Main */}
-      <div className="flex-1 overflow-auto flex flex-col relative z-10">
+      <div className="relative z-10 flex flex-1 flex-col overflow-auto">
         {/* Top header */}
-        <header className="m-6 backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl text-white h-20 shadow-2xl flex items-center justify-between px-8">
-          <div>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-red-400 bg-clip-text text-transparent">
+        <header className="health-card m-4 flex min-h-20 items-center justify-between px-4 py-4 text-white sm:m-6 sm:px-8">
+          <div className="flex items-start gap-3">
+            <button
+              type="button"
+              aria-label="Open menu"
+              onClick={() => setSidebarOpen(true)}
+              className="mt-1 rounded-lg border border-white/20 bg-white/5 px-2.5 py-1.5 text-slate-100 hover:bg-white/10 lg:hidden"
+            >
+              ☰
+            </button>
+            <div>
+            <h1 className="bg-gradient-to-r from-cyan-200 to-white bg-clip-text text-2xl font-bold text-transparent">
               {title}
             </h1>
             {subtitle ? (
-              <p className="text-sm text-gray-300">{subtitle}</p>
+              <p className="text-sm text-slate-300">{subtitle}</p>
             ) : (
-              <p className="text-sm text-gray-300">Manage and track your blood donation operations</p>
+              <p className="text-sm text-slate-300">Manage and track your blood donation operations</p>
             )}
+            </div>
           </div>
-          <div className="flex items-center gap-6">
-            <span className="text-sm text-gray-300">
-              Welcome, <span className="text-blue-300 font-semibold">{user?.fullName || "User"}</span>
+          <div className="flex items-center gap-3 sm:gap-6">
+            <span className="hidden text-sm text-slate-300 sm:inline">
+              Welcome, <span className="font-semibold text-cyan-200">{user?.fullName || "User"}</span>
             </span>
-            <div className="scale-110">
+            <div className="profile-frame rounded-full">
+              <div className="rounded-full border border-cyan-300/40 bg-slate-900/70 p-0.5">
               <UserButton afterSignOutUrl="/" />
+              </div>
             </div>
           </div>
         </header>
@@ -46,15 +59,6 @@ export default function DashboardLayout({ title, subtitle, active, children }) {
         {/* Page content */}
         <main className="flex-1 p-6 text-white">{children}</main>
       </div>
-
-      {/* Floating helpers */}
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(180deg); }
-        }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-      `}</style>
     </div>
   )
 }

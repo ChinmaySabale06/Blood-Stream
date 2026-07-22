@@ -9,8 +9,9 @@ import NearbyBloodBanks from './components/NearbyBloodBanks';
 import BloodDonationForm from './components/BloodDonationForm';
 import BloodCamp from './pages/BloodCamp';
 import BloodDonationList from './components/BloodDonationList';
-import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react';
-import UserHandler from './UserHandler'; // <-- Import the UserHandler component
+import { SignedIn } from '@clerk/clerk-react';
+import UserHandler from './UserHandler';
+import AuthTokenSync from './AuthTokenSync';
 import BloodStockDashboard from './components/BloodStockDashboard';
 import Appointments from './components/Appointments';
 import DonorRecord from './components/DonorRecords';
@@ -21,6 +22,7 @@ const App = () => {
 
   return (
     <>
+    <AuthTokenSync />
     <SignedIn>
       <UserHandler />
     </SignedIn>
@@ -42,10 +44,6 @@ const App = () => {
         <Route path='/reports' element={<SignedIn> <Reports /> </SignedIn>} />
         <Route path='/requestblood' element={<SignedIn> <RequestBlood /> </SignedIn>} />
       </Routes>
-
-      {/* <SignedOut>
-        <RedirectToSignIn />
-      </SignedOut> */}
     </>
   );
 };

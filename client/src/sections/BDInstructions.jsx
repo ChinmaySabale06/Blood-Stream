@@ -2,110 +2,105 @@ import React from "react"
 
 export default function BloodDonationInstructions() {
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 py-16 px-6 text-white overflow-hidden">
+    <section className="section-shell min-h-screen text-white">
       {/* Animated Background */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-900/20 to-indigo-900/20"></div>
-        <div className="absolute top-1/4 right-0 w-96 h-96 bg-blue-500/5 rounded-full animate-pulse"></div>
-        <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-red-500/5 rounded-full animate-bounce"></div>
-
-        {/* Moving elements */}
-        <div className="absolute top-20 left-1/3 w-4 h-4 bg-blue-400/60 rounded-full animate-ping"></div>
-        <div className="absolute bottom-40 right-1/4 w-6 h-6 bg-red-400/60 rounded-full animate-pulse"></div>
+        <div className="absolute top-1/4 right-0 h-96 w-96 rounded-full bg-cyan-500/12 blur-3xl"></div>
+        <div className="absolute bottom-1/4 left-0 h-80 w-80 rounded-full bg-rose-500/12 blur-3xl"></div>
       </div>
 
-      <div className="relative max-w-5xl mx-auto space-y-12">
+      <div className="section-container space-y-8 sm:space-y-10">
         {/* Main Heading */}
         <div className="text-center mb-16">
-          <h1 className="text-6xl font-bold bg-gradient-to-r from-red-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent mb-6">
+          <h1 className="section-title bg-gradient-to-r from-rose-300 via-cyan-200 to-slate-100 bg-clip-text text-transparent">
             Blood Donation Guide
           </h1>
-          <div className="w-32 h-1 bg-gradient-to-r from-red-500 to-blue-500 mx-auto rounded-full"></div>
+          <div className="mx-auto mt-4 h-1 w-24 rounded-full bg-gradient-to-r from-rose-500 to-cyan-500"></div>
         </div>
 
         {/* Steps for Donating Blood */}
-        <div className="backdrop-blur-xl bg-gradient-to-br from-green-900/20 to-emerald-900/20 border border-green-500/20 rounded-3xl shadow-2xl p-10 hover:bg-green-900/30 transition-all duration-500 group">
+        <div className="health-card p-6 sm:p-8 lg:p-10">
           <div className="flex items-center mb-6">
-            <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+            <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500 text-white">
               <span className="text-2xl font-bold">1</span>
             </div>
-            <h2 className="text-3xl font-bold text-green-400">Steps for Donating Blood</h2>
+            <h2 className="text-2xl font-bold text-emerald-200 sm:text-3xl">Steps for Donating Blood</h2>
           </div>
-          <ol className="list-decimal list-inside space-y-4 ml-6 text-lg">
-            <li className="hover:text-green-300 transition-colors duration-300">
+          <ol className="ml-6 list-decimal list-inside space-y-3 text-base text-slate-200 sm:text-lg">
+            <li>
               Register at the donation center with a valid photo ID.
             </li>
-            <li className="hover:text-green-300 transition-colors duration-300">
+            <li>
               Complete a medical screening and answer questions about your health and travel history.
             </li>
-            <li className="hover:text-green-300 transition-colors duration-300">
+            <li>
               A small blood sample will be taken to check your hemoglobin levels.
             </li>
-            <li className="hover:text-green-300 transition-colors duration-300">
+            <li>
               Relax in a donation chair; your arm will be cleaned and a sterile needle inserted.
             </li>
-            <li className="hover:text-green-300 transition-colors duration-300">
+            <li>
               Donate about 470ml (a pint) of blood; the process usually takes 8-10 minutes.
             </li>
-            <li className="hover:text-green-300 transition-colors duration-300">
+            <li>
               After donation, a bandage will be applied and you'll rest briefly before leaving.
             </li>
           </ol>
         </div>
 
         {/* Before and After Donation Tips */}
-        <div className="backdrop-blur-xl bg-gradient-to-br from-purple-900/20 to-violet-900/20 border border-purple-500/20 rounded-3xl shadow-2xl p-10 hover:bg-purple-900/30 transition-all duration-500 group">
+        <div className="health-card p-6 sm:p-8 lg:p-10">
           <div className="flex items-center mb-6">
-            <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+            <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-violet-500 text-white">
               <span className="text-2xl font-bold">2</span>
             </div>
-            <h2 className="text-3xl font-bold text-purple-400">Before & After Donation Tips</h2>
+            <h2 className="text-2xl font-bold text-violet-200 sm:text-3xl">Before & After Donation Tips</h2>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="backdrop-blur-sm bg-white/5 rounded-2xl p-6 border border-purple-500/10">
-              <h3 className="font-bold text-2xl mb-4 text-purple-300 flex items-center">
-                <span className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center mr-3 text-sm">
+            <div className="health-panel p-6">
+              <h3 className="mb-4 flex items-center text-xl font-bold text-violet-200 sm:text-2xl">
+                <span className="mr-3 flex h-8 w-8 items-center justify-center rounded-full bg-violet-500 text-sm">
                   📋
                 </span>
                 Before Donation
               </h3>
-              <ul className="list-disc list-inside space-y-3 text-gray-200">
-                <li className="hover:text-purple-300 transition-colors duration-300">Get a good night's sleep.</li>
-                <li className="hover:text-purple-300 transition-colors duration-300">
+              <ul className="list-disc list-inside space-y-3 text-slate-200">
+                <li>Get a good night's sleep.</li>
+                <li>
                   Eat a healthy, iron-rich meal (avoid fatty foods).
                 </li>
-                <li className="hover:text-purple-300 transition-colors duration-300">
+                <li>
                   Stay hydrated; drink plenty of water (avoid alcohol).
                 </li>
-                <li className="hover:text-purple-300 transition-colors duration-300">
+                <li>
                   Check if your medications are allowed for donation.
                 </li>
-                <li className="hover:text-purple-300 transition-colors duration-300">
+                <li>
                   Wear a shirt with sleeves you can roll up.
                 </li>
               </ul>
             </div>
-            <div className="backdrop-blur-sm bg-white/5 rounded-2xl p-6 border border-purple-500/10">
-              <h3 className="font-bold text-2xl mb-4 text-purple-300 flex items-center">
-                <span className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center mr-3 text-sm">
+            <div className="health-panel p-6">
+              <h3 className="mb-4 flex items-center text-xl font-bold text-violet-200 sm:text-2xl">
+                <span className="mr-3 flex h-8 w-8 items-center justify-center rounded-full bg-violet-500 text-sm">
                   ✨
                 </span>
                 After Donation
               </h3>
-              <ul className="list-disc list-inside space-y-3 text-gray-200">
-                <li className="hover:text-purple-300 transition-colors duration-300">
+              <ul className="list-disc list-inside space-y-3 text-slate-200">
+                <li>
                   Rest for 10-15 minutes and have a snack and drink.
                 </li>
-                <li className="hover:text-purple-300 transition-colors duration-300">
+                <li>
                   Keep your bandage on and dry for several hours.
                 </li>
-                <li className="hover:text-purple-300 transition-colors duration-300">
+                <li>
                   Drink extra fluids for the next 24 hours.
                 </li>
-                <li className="hover:text-purple-300 transition-colors duration-300">
+                <li>
                   Avoid strenuous exercise and heavy lifting that day.
                 </li>
-                <li className="hover:text-purple-300 transition-colors duration-300">
+                <li>
                   If you feel dizzy, sit or lie down until you recover.
                 </li>
               </ul>
@@ -114,41 +109,41 @@ export default function BloodDonationInstructions() {
         </div>
 
         {/* Eligibility Criteria */}
-        <div className="backdrop-blur-xl bg-gradient-to-br from-pink-900/20 to-rose-900/20 border border-pink-500/20 rounded-3xl shadow-2xl p-10 hover:bg-pink-900/30 transition-all duration-500 group">
+        <div className="health-card p-6 sm:p-8 lg:p-10">
           <div className="flex items-center mb-6">
-            <div className="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+            <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-rose-500 text-white">
               <span className="text-2xl font-bold">3</span>
             </div>
-            <h2 className="text-3xl font-bold text-pink-400">Eligibility Criteria</h2>
+            <h2 className="text-2xl font-bold text-rose-200 sm:text-3xl">Eligibility Criteria</h2>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
-            <ul className="list-disc list-inside space-y-3 text-lg text-gray-200">
-              <li className="hover:text-pink-300 transition-colors duration-300">
+            <ul className="list-disc list-inside space-y-3 text-base text-slate-200 sm:text-lg">
+              <li>
                 Age: 18–65 years<sup className="text-pink-400">*</sup>
               </li>
-              <li className="hover:text-pink-300 transition-colors duration-300">Weight: At least 50kg (110lbs)</li>
-              <li className="hover:text-pink-300 transition-colors duration-300">Hemoglobin: Minimum 12.5g/dL</li>
-              <li className="hover:text-pink-300 transition-colors duration-300">
+              <li>Weight: At least 50kg (110lbs)</li>
+              <li>Hemoglobin: Minimum 12.5g/dL</li>
+              <li>
                 Must be in good health and feeling well
               </li>
             </ul>
-            <ul className="list-disc list-inside space-y-3 text-lg text-gray-200">
-              <li className="hover:text-pink-300 transition-colors duration-300">
+            <ul className="list-disc list-inside space-y-3 text-base text-slate-200 sm:text-lg">
+              <li>
                 No recent infections, fever, or symptoms of illness
               </li>
-              <li className="hover:text-pink-300 transition-colors duration-300">
+              <li>
                 No major surgery within past 6 months
               </li>
-              <li className="hover:text-pink-300 transition-colors duration-300">
+              <li>
                 No high-risk activities for HIV/Hepatitis in recent months
               </li>
-              <li className="hover:text-pink-300 transition-colors duration-300">
+              <li>
                 For recent tattoos/piercings, must wait 6 months
               </li>
             </ul>
           </div>
-          <div className="mt-6 p-4 bg-pink-500/10 rounded-xl border border-pink-500/20">
-            <p className="text-sm text-pink-200">
+          <div className="mt-6 rounded-xl border border-rose-300/30 bg-rose-500/10 p-4">
+            <p className="text-sm text-rose-100">
               <sup className="text-pink-400">*</sup>Some centers allow 16–17 year-olds with consent; consider local
               guidelines.
             </p>

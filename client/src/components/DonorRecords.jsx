@@ -48,24 +48,24 @@ export default function DonorRecord() {
       active="donors"
     >
       {/* Filters */}
-      <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl p-6 mb-8">
+      <div className="health-card mb-8 p-6">
         <div className="grid md:grid-cols-3 gap-4">
           <input
             placeholder="Search by name, city, or contact"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full p-4 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition-all duration-300"
+            className="health-input"
           />
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            className="w-full p-4 rounded-2xl bg-white/10 border border-white/20 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition-all duration-300"
+            className="health-select"
           >
-            <option className="bg-gray-900" value="">
+            <option className="bg-slate-900" value="">
               All Blood Types
             </option>
             {["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"].map((t) => (
-              <option key={t} className="bg-gray-900" value={t}>
+              <option key={t} className="bg-slate-900" value={t}>
                 {t}
               </option>
             ))}
@@ -75,7 +75,7 @@ export default function DonorRecord() {
               setQuery("")
               setFilter("")
             }}
-            className="w-full py-4 rounded-2xl bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 transition-all duration-300 font-semibold"
+            className="health-btn-primary w-full"
           >
             Reset Filters
           </button>
@@ -83,16 +83,16 @@ export default function DonorRecord() {
       </div>
 
       {/* Donors Table */}
-      <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl overflow-hidden shadow-2xl">
+      <div className="health-card overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full">
             <thead>
               <tr className="border-b border-white/20">
-                <th className="p-5 text-left text-blue-300">Name</th>
-                <th className="p-5 text-left text-blue-300">Blood Type</th>
-                <th className="p-5 text-left text-blue-300">City</th>
-                <th className="p-5 text-left text-blue-300">Last Donation</th>
-                <th className="p-5 text-left text-blue-300">Contact</th>
+                <th className="p-5 text-left text-cyan-200">Name</th>
+                <th className="p-5 text-left text-cyan-200">Blood Type</th>
+                <th className="p-5 text-left text-cyan-200">City</th>
+                <th className="p-5 text-left text-cyan-200">Last Donation</th>
+                <th className="p-5 text-left text-cyan-200">Contact</th>
               </tr>
             </thead>
             <tbody>
@@ -103,13 +103,13 @@ export default function DonorRecord() {
                 >
                   <td className="p-5">{d.name}</td>
                   <td className="p-5">
-                    <span className="inline-block px-3 py-1 bg-red-500/20 rounded-full border border-red-500/30 text-red-300 font-semibold">
+                    <span className="inline-block rounded-full border border-rose-400/35 bg-rose-500/15 px-3 py-1 font-semibold text-rose-200">
                       {d.bloodType}
                     </span>
                   </td>
                   <td className="p-5">{d.city}</td>
                   <td className="p-5">{new Date(d.lastDonation).toLocaleDateString()}</td>
-                  <td className="p-5 text-blue-200">{d.contact}</td>
+                  <td className="p-5 text-cyan-200">{d.contact}</td>
                 </tr>
               ))}
               {filtered.length === 0 && (

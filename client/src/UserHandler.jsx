@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
-import axios from 'axios';
+import api from './lib/api';
 
 // This component handles saving a new Clerk user to your database.
 // You should place it in your app's main layout or App.js file.
@@ -18,17 +18,15 @@ const UserHandler = () => {
       const saveUserToDatabase = async () => {
         // Prepare the data to be sent to your backend.
         const userData = {
-          clerkId: user.id,
           // Get the primary email address from the user object.
           email: user.emailAddresses[0].emailAddress,
           // Assign a role. This can be dynamic based on your app's logic.
+          // clerkId is derived server-side from the verified session token.
           role: 'hospital',
         };
 
         try {
-          // Use axios to send a POST request to your backend endpoint.
-          // The URL should point to your backend server running on localhost:5000.
-          const response = await axios.post('http://localhost:5000/api/save-user', userData);
+          const response = await api.post('/api/save-user', userData);
 
           // Log the successful response from the server.
           console.log('User saved successfully!', response.data);

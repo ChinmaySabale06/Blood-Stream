@@ -16,83 +16,59 @@ const compatibility = [
 
 export default function BloodCompatibilityChart() {
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 py-16 px-6 text-white overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full animate-pulse"></div>
-        <div className="absolute top-1/2 -left-32 w-64 h-64 bg-red-500/10 rounded-full animate-bounce"></div>
-        <div className="absolute bottom-20 right-1/4 w-48 h-48 bg-indigo-500/10 rounded-full animate-ping"></div>
-
-        {/* Floating particles */}
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-400 rounded-full animate-float"></div>
-        <div className="absolute top-3/4 right-1/3 w-3 h-3 bg-red-400 rounded-full animate-float-delayed"></div>
-        <div className="absolute bottom-1/3 left-1/2 w-1 h-1 bg-indigo-400 rounded-full animate-float"></div>
+    <section className="section-shell min-h-screen">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -right-24 -top-20 h-72 w-72 rounded-full bg-cyan-500/16 blur-3xl"></div>
+        <div className="absolute -left-16 top-1/2 h-64 w-64 rounded-full bg-rose-500/14 blur-3xl"></div>
       </div>
 
-      <div className="relative max-w-6xl mx-auto">
-        <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl shadow-2xl p-10 hover:bg-white/10 transition-all duration-500">
+      <div className="section-container">
+        <div className="health-card p-5 sm:p-8 lg:p-10">
           <div className="text-center mb-12">
-            <h2 className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-red-400 bg-clip-text text-transparent mb-4">
+            <h2 className="section-title bg-gradient-to-r from-cyan-200 to-slate-100 bg-clip-text text-transparent">
               Blood Compatibility Matrix
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-red-500 mx-auto rounded-full"></div>
+            <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500"></div>
           </div>
 
           <div className="overflow-x-auto">
-            <table className="min-w-full table-auto">
+            <table className="min-w-full table-auto text-sm sm:text-base">
               <thead>
-                <tr className="border-b border-blue-500/30">
-                  <th className="px-6 py-4 text-xl font-semibold text-blue-300">Blood Type</th>
-                  <th className="px-6 py-4 text-xl font-semibold text-blue-300">Can Donate To</th>
-                  <th className="px-6 py-4 text-xl font-semibold text-blue-300">Can Receive From</th>
+                <tr className="border-b border-white/20">
+                  <th className="px-4 py-4 text-left text-sm font-semibold uppercase tracking-wider text-cyan-200 sm:px-6">Blood Type</th>
+                  <th className="px-4 py-4 text-left text-sm font-semibold uppercase tracking-wider text-cyan-200 sm:px-6">Can Donate To</th>
+                  <th className="px-4 py-4 text-left text-sm font-semibold uppercase tracking-wider text-cyan-200 sm:px-6">Can Receive From</th>
                 </tr>
               </thead>
               <tbody>
                 {compatibility.map((item, idx) => (
                   <tr
                     key={item.type}
-                    className={`border-b border-blue-700/20 hover:bg-white/5 transition-all duration-300 ${
-                      idx % 2 === 0 ? "bg-blue-900/20" : "bg-indigo-900/20"
+                    className={`border-b border-white/10 transition-colors hover:bg-white/10 ${
+                      idx % 2 === 0 ? "bg-white/5" : "bg-transparent"
                     }`}
                   >
-                    <td className="px-6 py-4 font-bold text-2xl text-red-400 text-center">
-                      <span className="inline-block px-4 py-2 bg-red-500/20 rounded-full border border-red-500/30">
+                    <td className="px-4 py-4 sm:px-6">
+                      <span className="inline-flex rounded-full border border-rose-400/35 bg-rose-500/14 px-3 py-1.5 text-sm font-bold text-rose-200 sm:px-4 sm:text-base">
                         {item.type}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-center text-gray-200">{item.donateTo}</td>
-                    <td className="px-6 py-4 text-center text-gray-200">{item.receiveFrom}</td>
+                    <td className="px-4 py-4 text-slate-200 sm:px-6">{item.donateTo}</td>
+                    <td className="px-4 py-4 text-slate-200 sm:px-6">{item.receiveFrom}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
 
-          <div className="mt-8 p-6 bg-gradient-to-r from-blue-900/30 to-indigo-900/30 rounded-2xl border border-blue-500/20">
-            <p className="text-blue-200 italic text-center text-lg">
+          <div className="health-panel mt-8 p-5">
+            <p className="text-center text-sm italic text-cyan-100 sm:text-base">
               💡 <strong>Pro Tip:</strong> Universal donors (O-) can save anyone's life. Universal recipients (AB+) can
               receive from anyone.
             </p>
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(180deg); }
-        }
-        @keyframes float-delayed {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-30px) rotate(-180deg); }
-        }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        .animate-float-delayed {
-          animation: float-delayed 8s ease-in-out infinite;
-        }
-      `}</style>
     </section>
   )
 }

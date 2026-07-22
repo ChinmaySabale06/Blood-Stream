@@ -1,11 +1,129 @@
 @import "tailwindcss";
 
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
 
-* {
-  box-sizing: border-box;
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(circle at 10% 10%, rgba(14, 165, 233, 0.22), transparent 35%),
+      radial-gradient(circle at 85% 20%, rgba(244, 63, 94, 0.16), transparent 30%),
+      radial-gradient(circle at 50% 95%, rgba(59, 130, 246, 0.18), transparent 38%),
+      linear-gradient(140deg, #020617 0%, #0f172a 45%, #111827 100%);
+    color: #e2e8f0;
+    font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: rgba(56, 189, 248, 0.35);
+    color: #f8fafc;
+  }
+
+  a,
+  button {
+    transition: all 220ms ease;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgba(56, 189, 248, 0.7);
+    outline-offset: 2px;
+  }
 }
 
-html, body {
-  height: 100%;
-  width: 100%;
+@layer components {
+  .section-shell {
+    @apply relative overflow-hidden px-4 py-14 sm:px-6 lg:px-8;
+  }
+
+  .section-container {
+    @apply relative z-10 mx-auto w-full max-w-7xl;
+  }
+
+  .section-title {
+    @apply text-3xl font-bold tracking-tight text-slate-100 sm:text-4xl lg:text-5xl;
+  }
+
+  .section-subtitle {
+    @apply mx-auto mt-4 max-w-3xl text-base text-slate-300 sm:text-lg;
+  }
+
+  .health-card {
+    @apply rounded-3xl border border-white/[0.15] bg-white/[0.08] shadow-2xl shadow-slate-950/40 backdrop-blur-2xl;
+  }
+
+  .health-panel {
+    @apply rounded-2xl border border-white/[0.12] bg-slate-950/35 backdrop-blur-xl;
+  }
+
+  .health-input {
+    @apply w-full rounded-xl border border-slate-400/30 bg-slate-950/50 px-4 py-3 text-sm text-slate-100 placeholder-slate-400 focus:border-cyan-400/70 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none;
+  }
+
+  .health-select {
+    @apply w-full appearance-none rounded-xl border border-slate-400/30 bg-slate-950/50 px-4 py-3 text-sm text-slate-100 placeholder-slate-400 focus:border-cyan-400/70 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none;
+  }
+
+  .health-textarea {
+    @apply w-full resize-y rounded-xl border border-slate-400/30 bg-slate-950/50 px-4 py-3 text-sm text-slate-100 placeholder-slate-400 focus:border-cyan-400/70 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none;
+  }
+
+  .health-btn-primary {
+    @apply inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-900/30 hover:from-cyan-400 hover:to-blue-500 active:scale-[0.99];
+  }
+
+  .health-btn-danger {
+    @apply inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-rose-500 to-red-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-rose-900/35 hover:from-rose-400 hover:to-red-500 active:scale-[0.99];
+  }
+
+  .health-btn-ghost {
+    @apply inline-flex items-center justify-center rounded-xl border border-slate-300/30 bg-white/5 px-5 py-3 text-sm font-semibold text-slate-100 hover:bg-white/10;
+  }
+
+  .status-pill {
+    @apply inline-flex rounded-full border px-2.5 py-1 text-xs font-semibold;
+  }
+
+  .profile-frame {
+    @apply rounded-2xl border border-white/20 bg-slate-950/85 p-1 shadow-lg shadow-slate-950/45;
+  }
+}
+
+@layer utilities {
+  @keyframes float-soft {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes page-enter {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-float-soft {
+    animation: float-soft 7s ease-in-out infinite;
+  }
+
+  .animate-page-enter {
+    animation: page-enter 360ms ease-out;
+  }
 }

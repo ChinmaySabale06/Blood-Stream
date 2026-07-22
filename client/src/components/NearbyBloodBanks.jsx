@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../lib/api";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -38,7 +38,7 @@ const NearbyBloodBanks = () => {
   // Fetch blood banks based on coordinates
   const fetchBloodBanks = async (latitude, longitude) => {
     try {
-      const res = await axios.get("http://localhost:5000/api/bloodbanks/nearby", {
+      const res = await api.get("/api/bloodbanks/nearby", {
         params: { lat: latitude, lng: longitude },
       });
       setBloodbanks(res.data);
@@ -109,26 +109,26 @@ const NearbyBloodBanks = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
-        <p className="text-lg">Loading nearby blood banks...</p>
+      <div className="section-shell flex min-h-screen items-center justify-center">
+        <div className="health-card p-8 text-lg">Loading nearby blood banks...</div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-900 text-red-400 p-4">
-        <p className="text-lg">{error}</p>
+      <div className="section-shell flex min-h-screen items-center justify-center p-4">
+        <div className="rounded-2xl border border-rose-400/35 bg-rose-500/10 p-6 text-lg text-rose-200">{error}</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white flex flex-col items-center p-6">
-      <h2 className="text-3xl font-serif font-bold mb-6 text-center">Nearby Blood Banks</h2>
+    <div className="section-shell flex min-h-screen flex-col items-center text-white">
+      <h2 className="section-title mb-8 text-center">Nearby Blood Banks</h2>
 
       {mapLocation && (
-        <div className="w-full max-w-5xl h-[500px] rounded-xl overflow-hidden shadow-xl border border-gray-700 mb-6">
+        <div className="health-card mb-6 h-[500px] w-full max-w-5xl overflow-hidden rounded-2xl">
           <MapContainer
             center={mapLocation}
             zoom={13}
@@ -173,25 +173,25 @@ const NearbyBloodBanks = () => {
       {/* Search and Use Current Location */}
       <form
         onSubmit={handleSearch}
-        className="w-full max-w-2xl flex flex-col sm:flex-row gap-4 bg-white p-2 rounded-xl"
+        className="health-card w-full max-w-3xl gap-3 p-3 sm:flex"
       >
         <input
           type="text"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           placeholder="Enter city, area or pin code..."
-          className="flex-grow px-4 py-2 rounded-md text-black focus:outline-none"
+          className="health-input flex-grow"
         />
         <button
           type="submit"
-          className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition"
+          className="health-btn-primary"
         >
           Search
         </button>
         <button
           type="button"
           onClick={handleUseCurrent}
-          className="px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white rounded-md transition"
+          className="health-btn-ghost"
         >
           Use Current
         </button>
